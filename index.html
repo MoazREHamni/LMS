@@ -20,6 +20,36 @@
         body{
             overflow-x:hidden;
         }
+        .slider-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    transition: transform 0.5s ease;
+}
+
+@media (max-width: 768px) {
+    .slider-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.slider-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
         .text-container {
             display: inline-block;
             min-height: 1.5em; /* Ensures space for the text to avoid shifting */
@@ -125,42 +155,35 @@
     </div>
 
     <!-- Featured Images -->
-    <div class="relative overflow-hidden mx-auto my-20" data-aos="fade-down">
-        <h2 class="text-3xl font-bold text-center mb-8">Featured Images</h2>
-        <div class="slider-wrapper flex py-6">
+  <!-- Featured Images -->
+<div class="relative overflow-hidden mx-auto my-20" data-aos="fade-down">
+    <h2 class="text-3xl font-bold text-center mb-8">Featured Images</h2>
+    <div class="slider-wrapper">
+        <div class="slider-container">
             <div class="slider-item p-2">
-                <img src="d-image/img9.jpg" alt="Image 1"
-                    class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
+                <img src="d-image/img9.jpg" alt="Image 1" class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
             </div>
-             <div class="slider-item p-2">
-                <img src="d-image/img2.jpg" alt="Image 1"
-                    class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
+            <div class="slider-item p-2">
+                <img src="d-image/img2.jpg" alt="Image 2" class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
             </div>
-             <div class="slider-item p-2">
-                <img src="d-image/img1.jpg" alt="Image 1"
-                    class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
+            <div class="slider-item p-2">
+                <img src="d-image/img1.jpg" alt="Image 3" class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
             </div>
-             <div class="slider-item p-2">
-                <img src="d-image/img7.jpg" alt="Image 1"
-                    class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
+            <div class="slider-item p-2">
+                <img src="d-image/img7.jpg" alt="Image 4" class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
             </div>
-             <div class="slider-item p-2">
-                <img src="d-image/img3.jpg" alt="Image 1"
-                    class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
+            <div class="slider-item p-2">
+                <img src="d-image/img3.jpg" alt="Image 5" class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
             </div>
-              <div class="slider-item p-2">
-                <img src="d-image/img8.jpg" alt="Image 1"
-                    class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
+            <div class="slider-item p-2">
+                <img src="d-image/img8.jpg" alt="Image 6" class="w-full h-auto rounded-lg shadow-lg hover:scale-105 transition-all ease-in hover:rounded-3xl">
             </div>
-            <!-- Add more slider items as needed -->
         </div>
-        <button
-            class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-600 transition-colors duration-300"
-            id="prevBtn">&#10094;</button>
-        <button
-            class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-600 transition-colors duration-300"
-            id="nextBtn">&#10095;</button>
     </div>
+    <button class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-600 transition-colors duration-300" id="prevBtn">&#10094;</button>
+    <button class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full shadow-lg hover:bg-gray-600 transition-colors duration-300" id="nextBtn">&#10095;</button>
+</div>
+
 
     <!-- Upcoming Events -->
     <div class="bg-white py-12">
@@ -273,72 +296,57 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init();
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('overlay');
 
-        // Slider functionality
-        let currentIndex = 0;
-        const slides = document.querySelectorAll('.slider-item');
-        const totalSlides = slides.length;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.style.display = i === index ? 'block' : 'none';
-            });
+    menuToggle.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('open')) {
+            mobileMenu.classList.remove('open');
+            overlay.classList.add('hidden');
+        } else {
+            mobileMenu.classList.add('open');
+            overlay.classList.remove('hidden');
         }
+    });
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            showSlide(currentIndex);
-        });
+    overlay.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        overlay.classList.add('hidden');
+    });
 
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            showSlide(currentIndex);
-        });
+    // Slider functionality
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.slider-item');
+    const totalSlides = slides.length;
+    const slidesToShow = 3; // Change this based on screen size using CSS
 
-        showSlide(currentIndex);
+    function updateSlider() {
+        const container = document.querySelector('.slider-container');
+        container.style.transform = `translateX(-${currentIndex * (100 / slidesToShow)}%)`;
+    }
 
-        // Form submission (mock functionality)
-        document.getElementById('reviewForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Your review has been submitted!');
-        });
-    </script>
-    
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const menuToggle = document.getElementById('menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const overlay = document.getElementById('overlay');
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % Math.ceil(totalSlides / slidesToShow);
+        updateSlider();
+    });
 
-            menuToggle.addEventListener('click', () => {
-                if (mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                    overlay.classList.add('hidden');
-                } else {
-                    mobileMenu.classList.add('open');
-                    overlay.classList.remove('hidden');
-                }
-            });
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + Math.ceil(totalSlides / slidesToShow)) % Math.ceil(totalSlides / slidesToShow);
+        updateSlider();
+    });
 
-            overlay.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                overlay.classList.add('hidden');
-            });
+    // Initialize the slider
+    updateSlider();
 
-            window.openCartSidebar = function () {
-                document.getElementById('sidebar').classList.remove('-translate-x-full');
-                document.getElementById('overlay').classList.remove('hidden');
-            }
+    // Form submission (mock functionality)
+    document.getElementById('reviewForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Your review has been submitted!');
+    });
+});
 
-            window.closeSidebar = function () {
-                document.getElementById('sidebar').classList.add('-translate-x-full');
-                document.getElementById('overlay').classList.add('hidden');
-            }
-        });
-    </script>
 </body>
 
 </html>
