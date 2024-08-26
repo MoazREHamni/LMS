@@ -70,28 +70,10 @@
            
             <!-- Navbar Links -->
             <div id="menu" class="hidden lg:flex space-x-6 items-center">
-                <!-- Conditional links based on user login status -->
-                <!-- User is not logged in -->
+                <!-- Static Links for All Users -->
                 <a href="_adminlogin.html" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">Admin Login</a>
                 <a href="_login.html" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">User Login</a>
                 <a href="_register.html" class="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">Register</a>
-                <a class="nav-link" href="view_profile.html">
-                    <img src="d-image/user.png" alt="profile image" class="index_image_profile w-14 h-14 object-fit border rounded-full">
-                </a>
-                <!-- User is logged in -->
-                <!-- Replace with actual profile image and cart length -->
-                <!-- Example profile image and cart length -->
-                <a href="_logout.html" class="block px-4 py-2 text-white hover:bg-gray-600">Logout</a>
-                <a href="user_dashboard.html" class="block px-4 py-2 text-white hover:bg-gray-600">User Dashboard</a>
-                <a href="view_profile.html" class="block px-4 py-2 text-white hover:bg-gray-600">View Profile</a>
-                <button onclick="openCartSidebar()" class="text-white">
-                    <i class="bi bi-bag"><sup class="font-bold text-md">3</sup></i> <!-- Example cart length -->
-                </button>
-                <div class="nav-item">
-                    <a class="nav-link" href="view_profile.html">
-                        <img src="user_images/profile_image.jpg" alt="profile image" class="index_image_profile w-14 h-14 object-fit border rounded-full"> <!-- Example profile image -->
-                    </a>
-                </div>
             </div>
         </div>
 
@@ -101,67 +83,8 @@
             <a href="_adminlogin.html" class="block px-4 py-2 text-white hover:bg-gray-600">Admin Login</a>
             <a href="_login.html" class="block px-4 py-2 text-white hover:bg-gray-600">User Login</a>
             <a href="_register.html" class="block px-4 py-2 text-white hover:bg-gray-600">Register</a>
-            <a class="nav-link" href="view_profile.html">
-                <img src="d-image/user.png" alt="profile image" class="index_image_profile w-14 h-14 object-fit border rounded-full">
-            </a>
-            <!-- Replace with actual profile image -->
-            <!-- Example profile image -->
-            <a href="_logout.html" class="block px-4 py-2 text-white hover:bg-gray-600">Logout</a>
-            <a href="user_dashboard.html" class="block px-4 py-2 text-white hover:bg-gray-600">User Dashboard</a>
-            <a href="view_profile.html" class="block px-4 py-2 text-white hover:bg-gray-600">View Profile</a>
-            <button onclick="openCartSidebar()" class="text-white text-end lg:hidden">
-                <i class="bi bi-bag"><sup class="font-bold text-md">3</sup></i> <!-- Example cart length -->
-            </button>
         </div>
     </nav>
-
-    <!-- SIDE BAR -->
-    <div id="sidebar" class="sidebar fixed inset-y-0 left-0 w-80 bg-white shadow-lg p-4 z-50 transform -translate-x-full transition-transform duration-300">
-        <button onclick="closeSidebar()" class="text-blue-500 absolute top-4 right-4 text-2xl">&times;</button>
-        <div id="cart-details">
-            <!-- Cart details will be loaded here (JavaScript will handle this) -->
-        </div>
-        <form action="" method="POST" id="checkout-form">
-            <input type="hidden" id="book_id" name="book_id">
-            <!-- Example cart details (static) -->
-            <div class="container mx-auto">
-                <div class="bg-white shadow-md rounded-lg overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Book Name</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Author</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Price</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <!-- Example Row -->
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <img src="book_images/example_image.jpg" alt="Book Image" class="w-16 h-16 object-cover rounded">
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Example Book</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">John Doe</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$20.00</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$20.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <a href="checkout.html" class="mt-4 bg-green-500 text-white px-4 py-2 rounded-md hover:opacity-85">Checkout</a>
-            <form method="POST" action="delete_items.html">
-                <input value="Clear Cart" name="delete" type="submit" class="mt-4 bg-gray-300 border text-white px-4 py-2 rounded-md hover:opacity-85">
-            </form>
-        </form>
-    </div>
-
-    <!-- OVERLAY -->
-    <div id="overlay" class="hidden"></div>
     <!-- Home Section -->
     <div class="relative h-screen bg-black">
         <img src="d-image/WhatsApp Image 2024-07-31 at 10.04.56 AM.jpeg" data-aos="flip-up" alt="Library Image"
@@ -310,7 +233,7 @@
         });
     </script>
     
-    <script>
+      <script>
         document.addEventListener('DOMContentLoaded', function () {
             const menuToggle = document.getElementById('menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
