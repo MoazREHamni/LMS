@@ -296,58 +296,73 @@
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const overlay = document.getElementById('overlay');
+       <script>
+        // Initialize AOS
+        AOS.init();
 
-    menuToggle.addEventListener('click', () => {
-        if (mobileMenu.classList.contains('open')) {
-            mobileMenu.classList.remove('open');
-            overlay.classList.add('hidden');
-        } else {
-            mobileMenu.classList.add('open');
-            overlay.classList.remove('hidden');
+        // Slider functionality
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slider-item');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.display = i === index ? 'block' : 'none';
+            });
         }
-    });
 
-    overlay.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        overlay.classList.add('hidden');
-    });
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        });
 
-    // Slider functionality
-    let currentIndex = 0;
-    const slides = document.querySelectorAll('.slider-item');
-    const totalSlides = slides.length;
-    const slidesToShow = 3; // Change this based on screen size using CSS
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        });
 
-    function updateSlider() {
-        const container = document.querySelector('.slider-container');
-        container.style.transform = `translateX(-${currentIndex * (100 / slidesToShow)}%)`;
-    }
+        showSlide(currentIndex);
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % Math.ceil(totalSlides / slidesToShow);
-        updateSlider();
-    });
-
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + Math.ceil(totalSlides / slidesToShow)) % Math.ceil(totalSlides / slidesToShow);
-        updateSlider();
-    });
-
-    // Initialize the slider
-    updateSlider();
-
-    // Form submission (mock functionality)
-    document.getElementById('reviewForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Your review has been submitted!');
-    });
-});
+        // Form submission (mock functionality)
+        document.getElementById('reviewForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Your review has been submitted!');
+        });
     </script>
+    
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('overlay');
+
+            menuToggle.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    overlay.classList.add('hidden');
+                } else {
+                    mobileMenu.classList.add('open');
+                    overlay.classList.remove('hidden');
+                }
+            });
+
+            overlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                overlay.classList.add('hidden');
+            });
+
+            window.openCartSidebar = function () {
+                document.getElementById('sidebar').classList.remove('-translate-x-full');
+                document.getElementById('overlay').classList.remove('hidden');
+            }
+
+            window.closeSidebar = function () {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+                document.getElementById('overlay').classList.add('hidden');
+            }
+        });
+    </script>
+
 </body>
 
 </html>
